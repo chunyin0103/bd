@@ -3,10 +3,11 @@ package com.example.bdt
 import android.app.Application
 import androidx.lifecycle.LiveData
 
-abstract class bdRepository {
-    abstract val bddao_val:bddao
-    abstract val alldb : LiveData<List<DB>>
-    public fun bdRepository(application: Application){
-        val database:bdDatabase
+class bdRepository (private val bddao: bddao){
+
+    val alldb : LiveData<List<DB>> = bddao.getAllBD()
+
+    suspend fun insertBD(bd:DB){
+        bddao.insertDB(bd)
     }
 }
